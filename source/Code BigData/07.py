@@ -3,14 +3,13 @@ import glob
 import os
 
 ## 전역 변수부
-file_list = glob.glob(os.path.join('C:/Users/admin/Desktop/Python, BigData/source/CSV/folder', '*.csv'))
+file_list = glob.glob(os.path.join('C:/Users/admin/Desktop/Python, BigData/source/CSV/folder/', '*.csv'))
 firstYN = True
 
 ## 메인 코드부
 for input_file in file_list :
     with open(input_file, "r") as inFp :
-            with open("C:/Users/admin/Desktop/Python, BigData/source/CSV/folder/강원인구통합.csv", "a", newline='') as outFp:
-                csvReader = csv.reader(inFp)
+            with open("C:/Users/admin/Desktop/Python, BigData/source/CSV/folder/강원인구통합.csv", "a", newline='') as outFp:                csvReader = csv.reader(inFp)
                 csvWriter = csv.writer(outFp)
                 header_list = next(csvReader)
 
