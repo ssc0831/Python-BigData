@@ -24,11 +24,7 @@ while True :
 
         htmlObject = urllib.request.urlopen(bookUrl)
         webPage = htmlObject.read()
-        
-        # 'euc-kr'로 디코딩
-        decodedPage = webPage.decode('euc-kr', 'ignore')
-        
-        bsObject = bs4.BeautifulSoup(decodedPage, 'html.parser')
+        bsObject = bs4.BeautifulSoup(webPage, 'html.parser')
         tag = bsObject.find('ul', {'class': 'clearfix'})
         all_books = tag.findAll('div', {'class': 'goods_info'})
 
@@ -37,3 +33,6 @@ while True :
 
     except :
         break
+
+
+# 참고> 본래 yes24 웹페이지 코딩이 EUC-KR로 되어 있어 글자깨짐 현상이 일어나서 UTF-8로 디코딩 해줘야 함.

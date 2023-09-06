@@ -1,5 +1,6 @@
 import bs4
 import urllib.request
+import csv
 
 ## 함수 선언부
 def getBookInfo(book_tag) :
@@ -13,10 +14,15 @@ def getBookInfo(book_tag) :
     return [bookName, bookAuth, bookPub, bookDate, bookPrice]
 
 ## 전역 변수부
-url = "http://www.yes24.com/24/Category/Display/001001046001?ParamSortTp=05&PageNumber="
+url = "http://www.yes24.com/24/Category/Display/001001003022004?ParamSortTp=05&PageNumber="
 pageNumber = 1
 
 ## 메인 코드부
+csvName =  'C:/Users/admin/Desktop/Python, BigData/source/CSV/pythonBook.csv'
+with open(csvName, 'w', newline='') as csvFp:
+    csvWriter = csv.writer(csvFp)
+    csvWriter.writerow(['책이름', '저자', '출판사', '출간일', '가격'])
+
 while True :
     try :
         bookUrl = url + str(pageNumber)
@@ -24,16 +30,17 @@ while True :
 
         htmlObject = urllib.request.urlopen(bookUrl)
         webPage = htmlObject.read()
-        
-        # 'euc-kr'로 디코딩
-        decodedPage = webPage.decode('euc-kr', 'ignore')
-        
-        bsObject = bs4.BeautifulSoup(decodedPage, 'html.parser')
+        bsObject = bs4.BeautifulSoup(webPage, 'html.parser')
         tag = bsObject.find('ul', {'class': 'clearfix'})
         all_books = tag.findAll('div', {'class': 'goods_info'})
 
         for book in all_books:
-            print(getBookInfo(book))
+            info_list = getBookInfo(book)
+            with open(csvName, 'a', newline='') as csvFp:
+                csvWriter = csv.writer(csvFp)
+                csvWriter.writerow(info_list)
 
     except :
         break
+
+print('Save. OK~')
