@@ -24,11 +24,7 @@ while True :
 
         htmlObject = urllib.request.urlopen(bookUrl)
         webPage = htmlObject.read()
-        
-        # 'euc-kr'로 디코딩
-        decodedPage = webPage.decode('euc-kr', 'ignore')
-        
-        bsObject = bs4.BeautifulSoup(decodedPage, 'html.parser')
+        bsObject = bs4.BeautifulSoup(webPage, 'html.parser')
         tag = bsObject.find('ul', {'class': 'clearfix'})
         all_books = tag.findAll('div', {'class': 'goods_info'})
 
