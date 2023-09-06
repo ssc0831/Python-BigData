@@ -25,7 +25,7 @@ while True :
         htmlObject = urllib.request.urlopen(bookUrl)
         webPage = htmlObject.read()
         
-        # 'euc-kr'로 디코딩
+        # 'euc-kr'로 디코딩 - Decoding 없으면 글자가 깨져 보인다.
         decodedPage = webPage.decode('euc-kr', 'ignore')
         
         bsObject = bs4.BeautifulSoup(decodedPage, 'html.parser')
