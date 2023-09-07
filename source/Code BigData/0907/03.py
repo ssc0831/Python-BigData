@@ -1,3 +1,6 @@
+## 넘파이와 리스트 처리 속도 비교
+
+
 import numpy as np
 import random
 import time
@@ -22,3 +25,8 @@ start = time.time()
 numpyAry = 255 - numpyAry
 end = time.time()
 print('## 넘파이 처리 시간 : %10.2f 초' % (end - start))
+
+## 리스트 처리 시간 :  9.45 초
+## 넘파이 처리 시간 :  0.12 초
+
+## 실행시 이와 같이 나타남
